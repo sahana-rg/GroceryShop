@@ -43,44 +43,6 @@ email varchar(45) NOT NULL,
 CONSTRAINT pk_id PRIMARY KEY (id));
 
 
-/*INSERT STATEMENTS*/
-INSERT INTO orders VALUES(1,"AADYA",370,"2023-01-29 12:22:12");
-
-INSERT INTO uom VALUES(1,"kg");
-
-INSERT INTO products VALUES(1,"Turmeric",1,120);
-INSERT INTO products VALUES( 12, "Colgate Toothpaste", 2,37.5); 
-
-INSERT INTO order_details VALUES(1,1,3,510); 
-
-INSERT INTO accounts VALUES( 1,Sahana,sahana,sahana@gmail.com);
-
-
-
-/*TRIGGERS*/
-CREATE DEFINER=`root`@`localhost` TRIGGER `orders_BEFORE_INSERT` BEFORE INSERT ON `orders` FOR EACH ROW BEGIN
-IF new.customer_name IS NULL THEN
-SET new.customer_name= "NAME MANDATORY";
-END IF;
-END
-
-
-
-
-/*STORED PROCEDURES*/
-CREATE DEFINER=`root`@`localhost` PROCEDURE `cust_details`(IN customer_name VARCHAR(100))
-BEGIN
-SELECT customer_name, order_id, datetime, total
-FROM orders
-WHERE customer_name= orders.customer_name;
-END
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `price_above_500`()
-BEGIN
-SELECT customer_name, total 
-FROM orders
-WHERE total>500;
-END
 
 
 
